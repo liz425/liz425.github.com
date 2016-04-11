@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Category: PAT | No.9527</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="No.9527">
+<meta property="og:url" content="http://liz425.github.com/categories/PAT/index.html">
+<meta property="og:site_name" content="No.9527">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="No.9527">
+<meta name="twitter:description">
+  
+    <link rel="alternative" href="/atom.xml" title="No.9527" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">No.9527</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://liz425.github.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-PAT-1007" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/01/15/PAT-1007/" class="article-date">
+  <time datetime="2015-01-16T04:37:51.000Z" itemprop="datePublished">1月 15 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PAT/">PAT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/15/PAT-1007/">PAT-1007</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1007</strong><br>最大子列和问题，在线处理，注意：<br>1、MaxSum初始化为-1，保证子列和为0时更新first_index 和last_index<br>2、相同子列和取最小i,j，因此Thissum == MaxSum 时不更新<br>3、循环结束，MaxSum == -1；说明元素全为负，特殊处理输出。</p>
+<p><strong>1007</strong></p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int MaxSubseqSum(int A[], int N)
+{
+    //MaxSum初始化为-1；如果所有元素都为负数，MaxSum 不更新，输出头尾
+    long MaxSum = -1;        
+    long ThisSum = 0;
+    int i;
+    int first_index = 0;
+    int current_first = 0;
+    int last_index = N - 1;
+    for (i = 0; i &lt; N; i++)
+    {
+        ThisSum += A[i];
+        if (ThisSum &gt; MaxSum)    //子列和更新
+        {
+            MaxSum = ThisSum;
+            last_index = i;
+            first_index = current_first;
+        }
+        else if (ThisSum &lt; 0)
+        {
+            ThisSum = 0;
+            current_first = i + 1;
+        }
+    }
+    if(MaxSum == -1)
+    {
+        MaxSum = 0;
+        first_index = 0;
+        last_index = N - 1;
+    }
+    printf(&quot;%d %d %d&quot;,MaxSum,A[first_index],A[last_index]);
+    return 0;
+}
+
+int main(void)
+{
+    int K, i;
+    scanf(&quot;%d&quot;, &amp;K);
+    int *A = calloc(K, sizeof(int));
+    for (i = 0; i &lt; K; i++)
+    {
+        scanf(&quot;%d&quot;, &amp;A[i]);
+    }
+    MaxSubseqSum(A, K);
+    //system(&quot;pause&quot;);
+    return 0;
+}
+</code></pre><p><em>by Liz, 1/15/2015</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://liz425.github.com/2015/01/15/PAT-1007/" data-id="cimw154rd000h9savtwi1covf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-PAT-1006" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/01/15/PAT-1006/" class="article-date">
+  <time datetime="2015-01-16T01:28:26.000Z" itemprop="datePublished">1月 15 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PAT/">PAT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/15/PAT-1006/">PAT-1006</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1006</strong><br>字符串比较大小，较为简单。<br>Java字符串有一系列内建函数，比C更方便，故用C完成。<br>注意，PAT提交时class名必须为Main，且<strong>不要</strong>包含 “package ···”</p>
+<p><strong>1006</strong></p>
+<pre><code>import java.util.Scanner;
+public class Main {
+
+    private static Scanner in;
+
+    public static void main(String[] args)
+    {
+        in = new Scanner(System.in);
+        int M = in.nextInt();
+        String[] id = new String[M];
+        String[] start = new String[M];
+        String[] stop = new String[M];
+        int start_min = 0, stop_max = 0;
+        for(int i = 0; i &lt; M; i++)
+        {
+            id[i] = in.next();
+            start[i] = in.next();
+            stop[i] = in.next();
+            if(start[i].compareTo(start[start_min]) &lt; 0)
+            {
+                start_min = i;
+            }
+            if(stop[i].compareTo(stop[stop_max]) &gt; 0)
+            {
+                stop_max = i;
+            }
+        }
+        System.out.println(id[start_min] + &apos; &apos; + id[stop_max]);
+    }
+}
+</code></pre><p><em>by Liz, 1/15/2015</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://liz425.github.com/2015/01/15/PAT-1006/" data-id="cimw154r9000b9savnz5nepvy" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-PAT-1005" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/01/15/PAT-1005/" class="article-date">
+  <time datetime="2015-01-15T21:52:14.000Z" itemprop="datePublished">1月 15 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PAT/">PAT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/15/PAT-1005/">PAT-1005</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1005</strong><br>和PAT 1001类似：<br>1、输入数据很长，不能用int存储，应用字符串来处理char S[100];<br>2、字符转数字：(int)char - 48 ，注意sum为0的情况；<br>3、switch语句数字转换为word。</p>
+<p><strong>1005</strong></p>
+<pre><code>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+
+//PAT Adcanced Level 1005: Spell It Right
+int main(void)
+{
+    char S[102];
+    scanf(&quot;%s&quot;, S);        //字符串形式存储 N
+    int i = 0;
+    int sum = 0;
+    while (S[i] != &apos;\0&apos;)
+    {
+        sum += (int)S[i] - 48;
+        i++;
+    }
+    if (sum == 0)
+    {
+        printf(&quot;zero&quot;);
+        return 0;
+    }
+    int k = 0;
+    int digits[3];        //99*9 &lt; 999, sum 最大为三位数
+    while (sum != 0)    
+    {
+        digits[k++] = sum % 10;
+        sum /= 10;
+    }
+
+    for (i = k - 1; i &gt;= 0; i--)
+    {
+        switch (digits[i])
+        {
+        case 0:
+            printf(&quot;zero&quot;);
+            break;
+        case 1:
+            printf(&quot;one&quot;);
+            break;
+        case 2:
+            printf(&quot;two&quot;);
+            break;
+        case 3:
+            printf(&quot;three&quot;);
+            break;
+        case 4:
+            printf(&quot;four&quot;);
+            break;
+        case 5:
+            printf(&quot;five&quot;);
+            break;
+        case 6:
+            printf(&quot;six&quot;);
+            break;
+        case 7:
+            printf(&quot;seven&quot;);
+            break;
+        case 8:
+            printf(&quot;eight&quot;);
+            break;
+        case 9:
+            printf(&quot;nine&quot;);
+            break;
+        default:
+            break;
+        }
+        if (i != 0)
+            printf(&quot; &quot;);
+    }
+
+
+    //system(&quot;pause&quot;);
+    return 0;
+}
+</code></pre><p><em>by Liz, 1/15/2015</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://liz425.github.com/2015/01/15/PAT-1005/" data-id="cimw154rh000l9sav5n2w9pnq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-PAT-1004" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/01/15/PAT-1004/" class="article-date">
+  <time datetime="2015-01-15T20:54:29.000Z" itemprop="datePublished">1月 15 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PAT/">PAT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/15/PAT-1004/">PAT-1004</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1004_Counting_Leaves</strong><br>其实就是树的层序遍历。<br>1、不是二叉树，树的每个节点可能有多个child，因此不能使用指针指向left right ，而是采用数组来存储所有的children。（当然，由于数组长度不定，还是得用指针malloc的方式开辟空间）<br>2、数的层序遍历，用队列实现即可。需要添加num_current和num_next来指示当前层的结点数，用以标记某一层遍历的结束。</p>
+<p><strong>1004</strong></p>
+<pre><code>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+
+//1004 Counting Leaves
+#define MaxSize 100
+typedef struct node{
+    int size;
+    int *child;
+}*Tnode;
+
+typedef struct{
+    int data[MaxSize];
+    int rear;
+    int front;
+}Queue;
+
+void AddQ(Queue *PtrQ, int item)
+{
+    if ((PtrQ-&gt;rear + 1) % MaxSize == PtrQ-&gt;front)
+        return;
+    PtrQ-&gt;rear = (PtrQ-&gt;rear + 1) % MaxSize;
+    PtrQ-&gt;data[PtrQ-&gt;rear] = item;
+}
+
+int DeleteQ(Queue *PtrQ)
+{
+    if (PtrQ-&gt;rear == PtrQ-&gt;front)
+        return -1;
+    else
+    {
+        PtrQ-&gt;front = (PtrQ-&gt;front + 1) % MaxSize;
+        return PtrQ-&gt;data[PtrQ-&gt;front];
+    }
+}
+
+int IsEmpty(Queue *PtrQ)
+{
+    if (PtrQ-&gt;rear == PtrQ-&gt;front)
+        return 1;
+    else
+        return 0;
+}
+
+int main(void)
+{
+    int N, M;
+    scanf(&quot;%d%d&quot;, &amp;N, &amp;M);
+    Tnode *tree = calloc(N + 1, sizeof(Tnode));  //总共N个结点，但根节点编号为1，故开辟N + 1个结点空间
+    int i, j;
+    for (i = 1; i &lt;= N; i++)
+    {
+        tree[i] = malloc(sizeof(struct node));
+        tree[i]-&gt;size = 0;                //每个节点child数目初始化为0
+    }
+    for (i = 1; i &lt;= M; i++)
+    {
+        int ID, K;
+        scanf(&quot;%d%d&quot;, &amp;ID, &amp;K);
+        tree[ID]-&gt;size = K;
+        tree[ID]-&gt;child = calloc(K, sizeof(int));
+        for (j = 0; j &lt; K; j++)
+        {
+            scanf(&quot;%d&quot;, &amp;tree[ID]-&gt;child[j]);
+        }
+    }
+    //层序遍历
+    int num_current = 1;        //当前层的结点数,初始化为根结点
+    int num_next = 0;            //下一层的结点数
+    int leaves_cnt = 0;
+    Queue *PtrQ = malloc(sizeof(Queue));            //创建队列，根结点入列
+    AddQ(PtrQ, 1);
+    while (num_current != 0)
+    {
+        int i, j;
+        for (i = 0; i &lt; num_current; i++)    //遍历当前层的结点
+        {
+            int parent = DeleteQ(PtrQ);
+            if (tree[parent]-&gt;size == 0)    //如果当前结点是叶子结点，leaves_cnt++
+            {
+                leaves_cnt++;
+                continue;
+            }
+            for (j = 0; j &lt; tree[parent]-&gt;size; j++)    //当前结点不是叶子结点，child入列
+            {
+                AddQ(PtrQ, tree[parent]-&gt;child[j]);
+                num_next++;
+            }
+        }
+        //当前层扫描完毕
+        printf(&quot;%d&quot;, leaves_cnt);    //输出当前层叶子节点数,
+        leaves_cnt = 0;                //当前层叶子节点数清零
+        if (num_next != 0)            //还有下一层，输出空格
+            printf(&quot; &quot;);
+        num_current = num_next;        //跟新当前层为下一层
+        num_next = 0;
+    }
+
+    //system(&quot;pause&quot;);
+    return 0;
+}
+</code></pre><p><em>by Liz, 1/15/2015</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://liz425.github.com/2015/01/15/PAT-1004/" data-id="cimw154rf000j9sav53ks2jtk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-PAT-1003" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/01/14/PAT-1003/" class="article-date">
+  <time datetime="2015-01-15T04:26:25.000Z" itemprop="datePublished">1月 14 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PAT/">PAT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/14/PAT-1003/">PAT-1003</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1003</strong><br>带权图的最短路径问题，要求给出最短路径条数（并列最短）等。<br>数据量不大（N&lt;=500),采用数组存储图，Dijkstra算法解决，注意：<br>1.终点和起点是同一点的情况；<br>2.对于某一点，如果新的一条路径比原路径的权重要小，更新最小路径。<br>2.对于某一点，如果新的一条路径和原路径的权重相同，更新到该节点的最小路径条数（并列数）</p>
+<pre><code>//PAT Adcanced Level 1003: Emergency
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+int g[500][500] = { 0 };    //存储图信息，值为两点间路径权重
+int person[500] = { 0 };    //某一结点的rescue teams number 
+int N, M, S, D;                //city数，road数，起点，终点
+int path[500] = { 0 };        //某一点到起点的最短路径的条数（可能有并列最短）
+int dist[500] = { 0 };        //某一点到起点的距离
+int collected[500] = { 0 };    //某一点是否被访问过
+int p_coll[500] = { 0 };    //到该点的最短路径（可能有并列）的最大rescue     teams number数
+
+int MinDist(void)
+{
+    int i, k = -1, min = 0x7fffffff;
+    for (i = 0; i &lt; N; i++)
+    {
+        if (!collected[i] &amp;&amp; (dist[i] &lt; min))
+        {
+            min = dist[i];
+            k = i;
+        }
+    }
+    return k;
+}
+
+void Dijkstra(int s, int d)
+{
+    int i = 0;
+    for (i = 0; i &lt; N; i++)
+    {
+        dist[i] = 0x7fffffff;
+    }
+    dist[s] = 0;
+    path[s] = 1;
+    p_coll[s] = person[s];
+    collected[s] = 0;
+    while (1)
+    {
+        int v = MinDist();
+        if (v == d)
+            return;
+        else if (v == -1)
+            return;
+        collected[v] = 1;
+        for (i = 0; i &lt; N; i++)
+        {
+            if (g[v][i] &amp;&amp; !collected[i])
+            {
+                if (dist[v] + g[v][i] &lt; dist[i])
+                {
+                    dist[i] = dist[v] + g[v][i];
+                    p_coll[i] = p_coll[v] + person[i];
+                    path[i] = path[v];
+                }
+                else if (dist[v] + g[v][i] == dist[i])
+                {
+                    path[i] = path[i] + path[v];
+                    if (p_coll[v] + person[i] &gt; p_coll[i])
+                    {
+                        p_coll[i] = p_coll[v] + person[i];
+                    }
+                }
+            }
+        }
+    }
+}
+
+int main(void)
+{
+    scanf(&quot;%d%d%d%d&quot;, &amp;N, &amp;M, &amp;S, &amp;D);
+    int i = 0;
+    int p, q, dis;
+    for (i = 0; i &lt; N; i++)
+    {
+        scanf(&quot;%d&quot;, &amp;person[i]);
+    }
+    for (i = 0; i &lt; M; i++)
+    {
+        scanf(&quot;%d%d%d&quot;, &amp;p, &amp;q, &amp;dis);
+        g[p][q] = dis;
+        g[q][p] = dis;
+    }
+    Dijkstra(S, D);
+    printf(&quot;%d %d&quot;, path[D], p_coll[D]);
+    //system(&quot;pause&quot;);
+    return 0;
+}
+</code></pre><p><em>By Liz, 1/14/2015.</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://liz425.github.com/2015/01/14/PAT-1003/" data-id="cimw154r200089savqkhipziw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-PAT-1002" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/01/14/PAT-1002/" class="article-date">
+  <time datetime="2015-01-15T04:26:17.000Z" itemprop="datePublished">1月 14 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PAT/">PAT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/14/PAT-1002/">PAT-1002</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1002</strong><br>多项式相加问题。对于数据量不大的情况，直接用数组暴力解决。<br>如果数据量偏大，应该采用链表存储。<br>本题用数组解决，测试点：</p>
+<ol>
+<li>0 &lt;= N &lt;= 1000, 数组长度应为1001而不是1000</li>
+<li>注意考虑正负相加为0的情况。</li>
+</ol>
+<p><strong>1002:</strong></p>
+<pre><code>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+
+//PAT Adcanced Level 1002: A + B For Polynominal
+int read_poly(double in[])
+{
+    int i, N;
+    int index = 0;
+    scanf(&quot;%d&quot;, &amp;N);
+    for (i = 0; i &lt; N; i++)
+    {
+        int expo;
+        double coef;
+        scanf(&quot;%d%lf&quot;, &amp;expo, &amp;coef);
+        in[expo] = coef;
+        if (i == 0)
+            index = expo;
+    }
+    return index;
+}
+
+int main(void)
+{
+    double a[1001] = { 0 };
+    double b[1001] = { 0 };
+    int index_a = read_poly(a);
+    int index_b = read_poly(b);
+    int index_max = index_a &gt; index_b ? index_a : index_b;
+    int i, cnt = 0;
+    for (i = index_max; i &gt;=0; i--)
+    {
+        a[i] = a[i] + b[i];
+        if (a[i] != 0)
+            cnt++;
+    }
+    printf(&quot;%d&quot;, cnt);
+    for (i = index_max; i &gt;= 0; i--)
+    {
+        if (a[i] != 0)
+            printf(&quot; %d %.1lf&quot;, i, a[i]);
+    }
+
+    //system(&quot;pause&quot;);
+    return 0;
+}
+</code></pre><p><em>By Liz, 1/14/2015.</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://liz425.github.com/2015/01/14/PAT-1002/" data-id="cimw154qz00059sav2r5ieumr" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-PAT-1001" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/01/14/PAT-1001/" class="article-date">
+  <time datetime="2015-01-15T04:26:07.000Z" itemprop="datePublished">1月 14 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PAT/">PAT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/14/PAT-1001/">PAT-1001</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>题目比较简单，贴出代码。</p>
+<p><strong>1001:</strong></p>
+<pre><code>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+
+//PAT Adcanced Level 1001: A + B Format
+int main(void)
+{
+    int a, b;
+    scanf(&quot;%d%d&quot;, &amp;a, &amp;b);
+    int sum = a + b;
+    if (sum == 0)        /*0直接输出0*/
+    {
+        printf(&quot;0&quot;);
+    }
+    else
+    {
+        if (sum &lt; 0)    /*负数先输出负号*/
+        {
+            printf(&quot;-&quot;);
+            sum = -sum;
+        }
+        int ans[10] = { 0 };
+        int n = 0;
+        while (sum &gt; 0)
+        {
+            ans[n++] = sum % 10;
+            sum = sum / 10;
+        }
+        while (--n &gt;= 0)
+        {
+            printf(&quot;%d&quot;, ans[n]);
+            if ((n % 3 == 0) &amp;&amp; (n &gt; 0))   /*每隔三位输出逗号*/
+                printf(&quot;,&quot;);
+        }
+    }
+
+    //system(&quot;pause&quot;);
+    return 0;
+}
+</code></pre><p><em>By Liz, 1/14/2015.</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://liz425.github.com/2015/01/14/PAT-1001/" data-id="cimw154qx00049savgb4kxisv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+  
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Friends/">Friends</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PAT/">PAT</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Personal/">Personal</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/0802/">0802</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2015/">2015</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/new-year/">new year</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/0802/" style="font-size: 10px;">0802</a> <a href="/tags/2015/" style="font-size: 10px;">2015</a> <a href="/tags/new-year/" style="font-size: 10px;">new year</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/10/Fear/">Fear</a>
+          </li>
+        
+          <li>
+            <a href="/2015/01/15/PAT-1007/">PAT-1007</a>
+          </li>
+        
+          <li>
+            <a href="/2015/01/15/PAT-1006/">PAT-1006</a>
+          </li>
+        
+          <li>
+            <a href="/2015/01/15/PAT-1005/">PAT-1005</a>
+          </li>
+        
+          <li>
+            <a href="/2015/01/15/PAT-1004/">PAT-1004</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Liz<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
